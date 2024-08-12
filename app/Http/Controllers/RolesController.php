@@ -31,7 +31,8 @@ class RolesController extends Controller
     public function create() : View
     {
         //
-        return view('roles.create');
+        // return view('roles.create');
+        return view('admin.configuracoes.previlegios.create');
 
     }
 
@@ -47,9 +48,9 @@ class RolesController extends Controller
         $data = $request->all();
         Role::create($data);
 
-        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
+        // return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
+        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro criado com sucesso');
 
-       
     }
 
     /**
@@ -62,7 +63,9 @@ class RolesController extends Controller
         $rolepermissions = $role->permissions()->get();
         $userroles = DB::table('model_has_roles')->where('role_id',$role->id)->get();
         
-        return view('roles.show', compact('role','rolepermissions','userroles'));
+        // return view('roles.show', compact('role','rolepermissions','userroles'));
+        return view('admin.configuracoes.previlegios.show', compact('role','rolepermissions','userroles'));
+
     }
 
     /**
@@ -72,7 +75,9 @@ class RolesController extends Controller
     {
         //
         $role = Role::findOrFail($id);
-        return view('roles.edit', compact('role'));
+        // return view('roles.edit', compact('role'));
+        return view('admin.configuracoes.previlegios.edit', compact('role'));
+
     }
 
     /**
@@ -85,7 +90,9 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update($data);
 
-        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');;
+        // return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
+        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro criado com sucesso');
+
     }
 
     /**
@@ -96,7 +103,9 @@ class RolesController extends Controller
         //
         $role = Role::findOrFail($id);
         $role->delete();
-        return to_route('roles.index')->with('messagesuccess','Registro apagado com sucesso');;
+        // return to_route('roles.index')->with('messagesuccess','Registro apagado com sucesso');
+        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro apagado com sucesso');;
+
     }
 
     public function addRolePermission(string $id) : View
@@ -104,7 +113,9 @@ class RolesController extends Controller
         $permissions = Permission::all();
         $role = Role::findOrFail($id);
         $rolepermissions = DB::table('role_has_permissions')->where('role_id',$role->id)->pluck('permission_id')->all();        
-        return view('roles.addpermission', compact('role','permissions','rolepermissions'));
+        // return view('roles.addpermission', compact('role','permissions','rolepermissions'));
+        return view('admin.configuracoes.previlegios.addpermission', compact('role','permissions','rolepermissions'));
+
     }
 
     public function storeRolePermission(string $id , Request $request) : RedirectResponse
@@ -118,7 +129,9 @@ class RolesController extends Controller
 
         $role->syncPermissions($data['permission']);
 
-        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');;
+        // return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
+        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro criado com sucesso');
+
     }
 
     public function addRoleToUser(string $id) : View
@@ -127,7 +140,9 @@ class RolesController extends Controller
         $roles = Role::all();
 
         $rolesuser = DB::table('model_has_roles')->where('model_id', $user->id)->pluck('role_id')->all();
+        // return view('users.roles.edit', compact('roles','user','rolesuser'));
         return view('users.roles.edit', compact('roles','user','rolesuser'));
+
     }
 
     public function storeRoleToUser(string $id , Request $request) : RedirectResponse
@@ -141,7 +156,9 @@ class RolesController extends Controller
 
         $user->syncRoles($data['role']);
 
+        // return redirect()->back();
         return redirect()->back();
+
     }
 
 
