@@ -23,6 +23,7 @@
 
         <div class="container-fluid">
             <div class="row">
+              
                 <div class="col-12">
                     <!-- Default box -->
                     <div class="card">
@@ -30,6 +31,8 @@
                             <h3 class="card-title">Lista dos utilizadores</h3>
                             <br>
                             <h5>Abaixo estão as informações dos utilizadores</h5>
+
+                            <a href="{{route('roles.create')}}" class="btn btn-primary"><i class="far fa-plus nav-icon"></i>Criar novo</a>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">

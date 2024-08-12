@@ -30,6 +30,7 @@
                             <h3 class="card-title">Lista dos utilizadores</h3>
                             <br>
                             <h5>Abaixo estão as informações dos utilizadores</h5>
+                            <a href="{{route('roles.index')}}" class="btn btn-primary"><i class="far fa-arrow-left nav-icon"></i>Voltar</a>
                         </div>
                         <div class="card-body">
                             
