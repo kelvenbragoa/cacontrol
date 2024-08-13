@@ -23,7 +23,7 @@ class UserController extends Controller
         $users = User::paginate();
 
 
-        return view('users.index', compact('users'));
+        return view('admin.configuracoes.utilizadores.index', compact('users'));
     }
 
     /**
@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         //
         $roles = Role::all();
-        return view('users.create',compact('roles'));
+        return view('admin.configuracoes.utilizadores.create',compact('roles'));
 
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        return view('users.show', compact('user'));
+        return view('admin.configuracoes.utilizadores.show', compact('user'));
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::all();
         $rolesuser = DB::table('model_has_roles')->where('model_id', $user->id)->pluck('role_id')->all();
-        return view('users.edit', compact('user','roles','rolesuser'));
+        return view('admin.configuracoes.utilizadores.edit', compact('user','roles','rolesuser'));
     }
 
     /**

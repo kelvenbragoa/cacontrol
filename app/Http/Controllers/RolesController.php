@@ -49,7 +49,7 @@ class RolesController extends Controller
         Role::create($data);
 
         // return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
-        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro criado com sucesso');
+        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
 
     }
 
@@ -91,7 +91,7 @@ class RolesController extends Controller
         $role->update($data);
 
         // return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
-        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro criado com sucesso');
+        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
 
     }
 
@@ -130,7 +130,7 @@ class RolesController extends Controller
         $role->syncPermissions($data['permission']);
 
         // return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
-        return to_route('admin.configuracoes.previlegios.index')->with('messagesuccess','Registro criado com sucesso');
+        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
 
     }
 
@@ -141,7 +141,7 @@ class RolesController extends Controller
 
         $rolesuser = DB::table('model_has_roles')->where('model_id', $user->id)->pluck('role_id')->all();
         // return view('users.roles.edit', compact('roles','user','rolesuser'));
-        return view('users.roles.edit', compact('roles','user','rolesuser'));
+        return view('admin.configuracoes.utilizadores.previlegios.edit', compact('roles','user','rolesuser'));
 
     }
 

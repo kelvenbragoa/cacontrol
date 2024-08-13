@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard')}}"><i class="fas fa-home"></i>{{ __('template.dashboard') }}</a></li>
-                        <li class="breadcrumb-item"><a><i class="fas fa-list"></i>{{ __('template.roles') }}</a></li>
+                        <li class="breadcrumb-item"><a><i class="fas fa-list"></i>{{ __('template.users') }}</a></li>
                     </ol>
                 </div>
             </div>
@@ -29,23 +29,31 @@
                             <h3 class="card-title"><i class="fa fa-file"></i>{{__('template.new_record')}}</h3>
                             <br>
                             <h5 class="mb-2"><i class="fa fa-edit"></i>{{__('template.provide_information_for_registration')}}</h5>
-                            <a href="{{route('roles.index')}}" class="btn btn-primary"><i class="fa fa-arrow-left nav-icon"></i>{{__('text.go_back')}}</a>
+                           
+                            <a href="{{ url('/users/' .$user->id ) }}" class="btn btn-primary"><i class="fa fa-arrow-left nav-icon"></i>{{__('text.go_back')}}</a>
+
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('roles.store') }}" method="POST">
-                                @csrf
-                                @method('POST')
-                                <div class="card-body">
-                                  <div class="form-group">
-                                    <label for="name">{{__('text.name')}}</label>
-                                    <input type="text" class="form-control" id="name" name="name"  value="{{ old('name') }}" placeholder="{{__('text.name')}}" required>
-                                  </div>
+                            <p><strong>Usuarios</strong>: {{ $user->name }}</p>
+                    <p><strong>Email</strong>: {{ $user->email }}</p>
+
+                    <form action="{{ url('/users/' . $user->id . '/roles') }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="grid grid-cols-4 gap-4">
+                            @foreach ($roles as $role)
+                                <div class="col">
+                                    <x-input-label for="name" value="{{ $role->name }}" />
+                                    <input type="checkbox" name="role[]" value="{{ $role->name }}" {{ in_array($role->id, $rolesuser) ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
+                            @endforeach
+                        </div>
+                        <div class="mt-4">
+                            <x-primary-button>
+                                {{__('template.submit')}}
+                            </x-primary-button>
+                        </div>
+                    </form>
                         </div>
                         <!-- /.card-body -->
                     </div>

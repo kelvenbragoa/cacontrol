@@ -33,20 +33,28 @@
 
                         </div>
                         <div class="card-body">
-                           
-                            <form action="{{ route('roles.update',$role->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
+                            <p><strong>{{__('template.roles')}}:</strong> {{ $role->name }}</p>
 
-                                <div class="form-group">
-                                    <label for="name">{{__('text.name')}}</label>
-                                    <input type="text" class="form-control" id="name" name="name"  value="{{ $role->name }}" placeholder="{{__('text.name')}}" required>
-                                  </div>
-         
-                                <div class="mt-4">
-                                    <button type="submit" class="btn btn-primary">{{__('template.submit')}}</button>
+                    <form action="{{ url('/roles/' . $role->id . '/rolepermission') }}" method="POST">
+                        @csrf
+                        @method('POST')
+
+                        <div class="grid grid-cols-4 gap-4">
+                            @foreach ($permissions as $permission)
+                                <div class="col">
+                                    <x-input-label for="name" value="{{ $permission->name }}" />
+                                    <input type="checkbox" name="permission[]" value="{{ $permission->name }}"
+                                        {{ in_array($permission->id, $rolepermissions) ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    {{-- <x-text-input id="name" name="permission[]" value="{{$permission->name}}" type="checkbox" :checked="in_array($permission->id, $rolepermissions) ? 'true' : 'false'" /> --}}
                                 </div>
-                            </form>
+                            @endforeach
+                        </div>
+
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">{{__('template.submit')}}</button>
+                        </div>
+                    </form>
                         </div>
                         <!-- /.card-body -->
                     </div>

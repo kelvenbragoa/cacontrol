@@ -19,7 +19,7 @@ class PermissionController extends Controller
         //
         $permissions = Permission::paginate();
 
-        return view('permissions.index', compact('permissions'));
+        return view('admin.configuracoes.permissoes.index', compact('permissions'));
     }
 
     /**
@@ -28,7 +28,7 @@ class PermissionController extends Controller
     public function create() : View
     {
         //
-        return view('permissions.create');
+        return view('admin.configuracoes.permissoes.create');
 
     }
 
@@ -53,7 +53,7 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
         $roles = $permission->roles();
         $users = $permission->users();
-        return view('permissions.show', compact('permission','roles','users'));
+        return view('admin.configuracoes.permissoes.show', compact('permission','roles','users'));
     }
 
     /**
@@ -63,7 +63,7 @@ class PermissionController extends Controller
     {
         //
         $permission = Permission::findOrFail($id);
-        return view('permissions.edit', compact('permission'));
+        return view('admin.configuracoes.permissoes.edit', compact('permission'));
     }
 
     /**
@@ -97,7 +97,7 @@ class PermissionController extends Controller
         $permissions = Permission::all();
 
         $permissionsuser = DB::table('model_has_permissions')->where('model_id', $user->id)->pluck('permission_id')->all();
-        return view('users.permissions.edit', compact('permissions','user','permissionsuser'));
+        return view('admin.configuracoes.utilizadores.permissoes.edit', compact('permissions','user','permissionsuser'));
     }
 
     public function storePermissionToUser(string $id , Request $request) : RedirectResponse
