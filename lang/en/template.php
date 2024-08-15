@@ -44,7 +44,12 @@ return [
     'induced'=> 'Induced',
     'account_settings'=>'Account Settings',
     'profile'=>'Profile',
-    'password'=>'Password'
+    'password'=>'Password',
+    'logout'=>'Logout',
+    'home'=>'Home',
+    'more_info'=>'More info',
+
+
 
 
 

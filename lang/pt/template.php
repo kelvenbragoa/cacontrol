@@ -43,5 +43,10 @@ return [
     'induced'=> 'Induzidos',
     'account_settings'=>'Configurações da conta',
     'profile'=>'Perfil',
-    'password'=>'Palavra passe'
+    'password'=>'Palavra passe',
+    'logout'=>'Sair',
+    'home'=>'Inicio',
+    'more_info'=>'Mais informações',
+
+
 ];
